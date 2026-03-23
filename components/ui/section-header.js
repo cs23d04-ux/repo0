@@ -3,18 +3,7 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { useThemeColor } from '@/hooks/use-theme-color';
 
-interface SectionHeaderProps {
-  title: string;
-  subtitle?: string;
-  actionLabel?: string;
-  onAction?: () => void;
-}
-
-/**
- * Reusable section title row with an optional right-aligned action button.
- * Used at the top of every major content section across all screens.
- */
-export function SectionHeader({ title, subtitle, actionLabel, onAction }: SectionHeaderProps) {
+export function SectionHeader({ title, subtitle, actionLabel, onAction }) {
   const primaryColor = useThemeColor({}, 'primary');
 
   return (

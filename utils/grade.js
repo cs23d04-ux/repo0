@@ -1,8 +1,7 @@
 import { GradeColors } from '@/constants/theme';
-import type { Grade, GradeType, LetterGrade } from '@/types';
 
 /** Convert a raw score to a letter grade. */
-export function scoreToLetter(score: number, maxScore: number): LetterGrade {
+export function scoreToLetter(score, maxScore) {
   const pct = (score / maxScore) * 100;
   if (pct >= 97) return 'A+';
   if (pct >= 93) return 'A';
@@ -19,7 +18,7 @@ export function scoreToLetter(score: number, maxScore: number): LetterGrade {
 }
 
 /** Get the semantic color for a letter grade. */
-export function getLetterColor(letter: LetterGrade): string {
+export function getLetterColor(letter) {
   if (letter.startsWith('A')) return GradeColors.A;
   if (letter.startsWith('B')) return GradeColors.B;
   if (letter.startsWith('C')) return GradeColors.C;
@@ -29,9 +28,9 @@ export function getLetterColor(letter: LetterGrade): string {
 
 /**
  * Compute an overall weighted score ratio (0–1) from a list of grades.
- * Uses each grade's `weight` field as the percentage contribution.
+ * Uses each grade's weight field as the percentage contribution.
  */
-export function computeOverallScore(grades: Grade[]): number {
+export function computeOverallScore(grades) {
   if (grades.length === 0) return 0;
   const totalWeight = grades.reduce((sum, g) => sum + g.weight, 0);
   if (totalWeight === 0) return 0;
@@ -43,8 +42,8 @@ export function computeOverallScore(grades: Grade[]): number {
 }
 
 /** Human-readable label for a grade type. */
-export function gradeTypeLabel(type: GradeType): string {
-  const labels: Record<GradeType, string> = {
+export function gradeTypeLabel(type) {
+  const labels = {
     attendance: 'Attendance',
     assignment: 'Assignment',
     quiz: 'Quiz',
@@ -55,7 +54,7 @@ export function gradeTypeLabel(type: GradeType): string {
 }
 
 /** Convert a GPA (0–4) to a letter grade. */
-export function gpaToLetter(gpa: number): LetterGrade {
+export function gpaToLetter(gpa) {
   if (gpa >= 4.0) return 'A+';
   if (gpa >= 3.7) return 'A';
   if (gpa >= 3.3) return 'A-';

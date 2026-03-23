@@ -1,8 +1,3 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
- */
-
 import { Platform } from 'react-native';
 
 const tintColorLight = '#0a7ea4';
@@ -47,36 +42,11 @@ export const Colors = {
   },
 };
 
-// Semantic grade colors — same in both light and dark (meaning doesn't change)
-export const GradeColors = {
-  A: '#2DB87D',
-  B: '#3B82F6',
-  C: '#F59E0B',
-  D: '#F97316',
-  F: '#EF4444',
-} as const;
-
-// Accent palette to auto-assign colors to subjects
-export const SubjectPalette = [
-  '#6366F1',
-  '#EC4899',
-  '#F59E0B',
-  '#10B981',
-  '#3B82F6',
-  '#8B5CF6',
-  '#EF4444',
-  '#14B8A6',
-] as const;
-
 export const Fonts = Platform.select({
   ios: {
-    /** iOS `UIFontDescriptorSystemDesignDefault` */
     sans: 'system-ui',
-    /** iOS `UIFontDescriptorSystemDesignSerif` */
     serif: 'ui-serif',
-    /** iOS `UIFontDescriptorSystemDesignRounded` */
     rounded: 'ui-rounded',
-    /** iOS `UIFontDescriptorSystemDesignMonospaced` */
     mono: 'ui-monospace',
   },
   default: {
@@ -92,3 +62,24 @@ export const Fonts = Platform.select({
     mono: "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
   },
 });
+
+// Semantic grade colors — same in both light and dark
+export const GradeColors = {
+  A: '#2DB87D',
+  B: '#3B82F6',
+  C: '#F59E0B',
+  D: '#F97316',
+  F: '#EF4444',
+};
+
+// Accent palette to auto-assign colors to subjects
+export const SubjectPalette = [
+  '#6366F1',
+  '#EC4899',
+  '#F59E0B',
+  '#10B981',
+  '#3B82F6',
+  '#8B5CF6',
+  '#EF4444',
+  '#14B8A6',
+];

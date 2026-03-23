@@ -1,24 +1,10 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { type ComponentProps } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { useThemeColor } from '@/hooks/use-theme-color';
 
-interface EmptyStateProps {
-  icon: ComponentProps<typeof MaterialIcons>['name'];
-  title: string;
-  subtitle?: string;
-  actionLabel?: string;
-  onAction?: () => void;
-}
-
-/**
- * Full-area placeholder shown when a list has no items.
- * Accepts a Material icon name, descriptive text, and an optional CTA.
- * Used in subjects list, grades list, and schedule when data is empty.
- */
-export function EmptyState({ icon, title, subtitle, actionLabel, onAction }: EmptyStateProps) {
+export function EmptyState({ icon, title, subtitle, actionLabel, onAction }) {
   const mutedColor = useThemeColor({}, 'muted');
   const primaryColor = useThemeColor({}, 'primary');
 

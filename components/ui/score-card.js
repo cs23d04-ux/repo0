@@ -3,19 +3,9 @@ import { StyleSheet, View } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { useThemeColor } from '@/hooks/use-theme-color';
-import type { Grade } from '@/types';
 import { getLetterColor, gradeTypeLabel, scoreToLetter } from '@/utils/grade';
 
-interface ScoreCardProps {
-  grade: Grade;
-}
-
-/**
- * Compact row card for a single assessment (quiz, assignment, midterm, etc.).
- * Shows the assessment name, type, weight, and the earned letter + percentage.
- * Used in subject detail screens and grade breakdown lists.
- */
-export function ScoreCard({ grade }: ScoreCardProps) {
+export function ScoreCard({ grade }) {
   const letter = scoreToLetter(grade.score, grade.maxScore);
   const letterColor = getLetterColor(letter);
   const borderColor = useThemeColor({}, 'border');

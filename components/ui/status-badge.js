@@ -3,18 +3,8 @@ import { StyleSheet, View } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import type { SubjectStatus } from '@/types';
 
-interface StatusBadgeProps {
-  status: SubjectStatus;
-  size?: 'sm' | 'md';
-}
-
-/**
- * Pill badge showing whether a subject is currently being studied or already completed.
- * Used in SubjectCard, subject detail headers, and grade rows.
- */
-export function StatusBadge({ status, size = 'md' }: StatusBadgeProps) {
+export function StatusBadge({ status, size = 'md' }) {
   const scheme = useColorScheme() ?? 'light';
   const color = status === 'studying' ? Colors[scheme].studying : Colors[scheme].studied;
 

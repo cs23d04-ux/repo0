@@ -9,33 +9,9 @@ import Animated, {
 
 import { ThemedText } from '@/components/themed-text';
 import { useThemeColor } from '@/hooks/use-theme-color';
-import type { LetterGrade } from '@/types';
 import { getLetterColor, scoreToLetter } from '@/utils/grade';
 
-interface GradeBarProps {
-  score: number;
-  maxScore: number;
-  /** Provide a pre-computed letter to avoid re-computing. */
-  letter?: LetterGrade;
-  showLabel?: boolean;
-  animated?: boolean;
-  height?: number;
-}
-
-/**
- * Horizontal progress bar showing a score as a filled track.
- * Displays a letter grade and numeric score alongside the bar.
- * Animates in on mount by default (uses react-native-reanimated).
- * Used in SubjectCard, subject detail, and grades overview.
- */
-export function GradeBar({
-  score,
-  maxScore,
-  letter,
-  showLabel = true,
-  animated = true,
-  height = 8,
-}: GradeBarProps) {
+export function GradeBar({ score, maxScore, letter, showLabel = true, animated = true, height = 8 }) {
   const computedLetter = letter ?? scoreToLetter(score, maxScore);
   const fillColor = getLetterColor(computedLetter);
   const trackColor = useThemeColor({}, 'border');
@@ -53,7 +29,7 @@ export function GradeBar({
   }, [percentage, animated, progress]);
 
   const animatedFill = useAnimatedStyle(() => ({
-    width: `${progress.value * 100}%` as `${number}%`,
+    width: `${progress.value * 100}%`,
   }));
 
   return (
@@ -70,9 +46,7 @@ export function GradeBar({
       {showLabel && (
         <View style={styles.labels}>
           <ThemedText style={[styles.letter, { color: fillColor }]}>{computedLetter}</ThemedText>
-          <ThemedText style={styles.score}>
-            {score}/{maxScore}
-          </ThemedText>
+          <ThemedText style={styles.score}>{score}/{maxScore}</ThemedText>
         </View>
       )}
     </View>

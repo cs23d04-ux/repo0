@@ -3,33 +3,20 @@ import { StyleSheet, View } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { useThemeColor } from '@/hooks/use-theme-color';
-import type { ClassType, ScheduleEntry, Subject } from '@/types';
 
-interface ScheduleBlockProps {
-  entry: ScheduleEntry;
-  subject: Subject;
-}
-
-const CLASS_TYPE_LABEL: Record<ClassType, string> = {
+const CLASS_TYPE_LABEL = {
   lecture: 'Lecture',
   lab: 'Lab',
   tutorial: 'Tutorial',
   seminar: 'Seminar',
 };
 
-/**
- * A single time-block row for the schedule screen.
- * Inherits the subject's accent color for the left strip and type badge,
- * making it consistent with SubjectCard while serving a different layout need.
- * Used in the schedule list grouped by day.
- */
-export function ScheduleBlock({ entry, subject }: ScheduleBlockProps) {
+export function ScheduleBlock({ entry, subject }) {
   const borderColor = useThemeColor({}, 'border');
 
   return (
     <ThemedView style={[styles.block, { borderColor }]}>
       <View style={[styles.colorBar, { backgroundColor: subject.color }]} />
-
       <View style={styles.content}>
         <View style={styles.top}>
           <ThemedText style={styles.name} numberOfLines={1}>
@@ -41,7 +28,6 @@ export function ScheduleBlock({ entry, subject }: ScheduleBlockProps) {
             </ThemedText>
           </View>
         </View>
-
         <View style={styles.meta}>
           <ThemedText style={styles.metaText}>
             {entry.startTime} – {entry.endTime}

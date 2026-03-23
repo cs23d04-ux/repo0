@@ -16,6 +16,16 @@ export const Colors = {
     icon: '#687076',
     tabIconDefault: '#687076',
     tabIconSelected: tintColorLight,
+    // App-specific tokens
+    surface: '#F8F9FA',
+    border: '#E9ECEF',
+    muted: '#6C757D',
+    primary: '#0a7ea4',
+    success: '#2DB87D',
+    warning: '#F59E0B',
+    danger: '#EF4444',
+    studying: '#3B82F6',
+    studied: '#2DB87D',
   },
   dark: {
     text: '#ECEDEE',
@@ -24,8 +34,39 @@ export const Colors = {
     icon: '#9BA1A6',
     tabIconDefault: '#9BA1A6',
     tabIconSelected: tintColorDark,
+    // App-specific tokens
+    surface: '#1E2122',
+    border: '#2D3436',
+    muted: '#9BA1A6',
+    primary: '#38BDF8',
+    success: '#34D399',
+    warning: '#FBBF24',
+    danger: '#F87171',
+    studying: '#60A5FA',
+    studied: '#34D399',
   },
 };
+
+// Semantic grade colors — same in both light and dark (meaning doesn't change)
+export const GradeColors = {
+  A: '#2DB87D',
+  B: '#3B82F6',
+  C: '#F59E0B',
+  D: '#F97316',
+  F: '#EF4444',
+} as const;
+
+// Accent palette to auto-assign colors to subjects
+export const SubjectPalette = [
+  '#6366F1',
+  '#EC4899',
+  '#F59E0B',
+  '#10B981',
+  '#3B82F6',
+  '#8B5CF6',
+  '#EF4444',
+  '#14B8A6',
+] as const;
 
 export const Fonts = Platform.select({
   ios: {

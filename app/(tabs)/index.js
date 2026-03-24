@@ -1,98 +1,220 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { HelloWave } from '../../components/hello-wave';
-import ParallaxScrollView from '../../components/parallax-scroll-view';
-import { ThemedText } from '../../components/themed-text';
-import { ThemedView } from '../../components/themed-view';
-import { Link } from 'expo-router';
+import { ScheduleBlock } from '@/components/schedule-block';
+import { SubjectCard } from '@/components/subject-card';
+import { ThemedText } from '@/components/themed-text';
+import { ThemedView } from '@/components/themed-view';
+import { SectionHeader } from '@/components/ui/section-header';
+import { UpcomingCard } from '@/components/ui/upcoming-card';
+import { mockGrades, mockSchedule, mockStudent, mockSubjects, mockUpcoming } from '@/data/mock';
+import { useThemeColor } from '@/hooks/use-theme-color';
+import { computeOverallScore } from '@/utils/grade';
+
+const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+function getGreeting() {
+  const h = new Date().getHours();
+  if (h < 12) return 'Good morning';
+  if (h < 17) return 'Good afternoon';
+  if (h < 21) return 'Good evening';
+  return 'Good night';
+}
 
 export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('../../assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.jsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+  const border = useThemeColor({}, 'border');
+  const muted = useThemeColor({}, 'muted');
+  const primary = useThemeColor({}, 'primary');
+  const surface = useThemeColor({}, 'surface');
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+  const today = DAYS[new Date().getDay()];
+  const subjectMap = Object.fromEntries(mockSubjects.map(s => [s.id, s]));
+
+  const todaySchedule = mockSchedule
+    .filter(e => e.day === today)
+    .sort((a, b) => a.startTime.localeCompare(b.startTime));
+
+  const studyingSubjects = mockSubjects.filter(s => s.status === 'studying');
+  const totalCredits = studyingSubjects.reduce((sum, s) => sum + s.credits, 0);
+
+  const urgentUpcoming = mockUpcoming.slice(0, 3);
+
+  return (
+    <SafeAreaView style={styles.safe} edges={['top']}>
+      <ScrollView
+        style={styles.scroll}
+        contentContainerStyle={styles.content}
+        showsVerticalScrollIndicator={false}>
+
+        {/* ── Greeting ── */}
+        <View style={styles.header}>
+          <ThemedText style={[styles.greetText, { color: muted }]}>{getGreeting()} 👋</ThemedText>
+          <ThemedText style={styles.nameText}>{mockStudent.name}</ThemedText>
+          <ThemedText style={[styles.metaText, { color: muted }]}>
+            {mockStudent.studentId} · Year {mockStudent.year} · {mockStudent.major}
+          </ThemedText>
+        </View>
+
+        {/* ── Stats ── */}
+        <View style={styles.statsRow}>
+          <ThemedView style={[styles.statCard, { borderColor: border }]}>
+            <ThemedText style={[styles.statLabel, { color: muted }]}>GPA</ThemedText>
+            <ThemedText style={[styles.statValue, { color: primary }]}>
+              {mockStudent.gpa.toFixed(1)}
+            </ThemedText>
+            <ThemedText style={[styles.statSub, { color: muted }]}>/ 4.0</ThemedText>
+          </ThemedView>
+
+          <ThemedView style={[styles.statCard, { borderColor: border }]}>
+            <ThemedText style={[styles.statLabel, { color: muted }]}>Credits</ThemedText>
+            <ThemedText style={[styles.statValue, { color: primary }]}>{totalCredits}</ThemedText>
+            <ThemedText style={[styles.statSub, { color: muted }]}>
+              {studyingSubjects.length} subjects
+            </ThemedText>
+          </ThemedView>
+
+          <ThemedView style={[styles.statCard, { borderColor: border }]}>
+            <ThemedText style={[styles.statLabel, { color: muted }]}>Year</ThemedText>
+            <ThemedText style={[styles.statValue, { color: primary }]}>{mockStudent.year}</ThemedText>
+            <ThemedText style={[styles.statSub, { color: muted }]}>of 4</ThemedText>
+          </ThemedView>
+        </View>
+
+        {/* ── Upcoming deadlines ── */}
+        <View style={styles.section}>
+          <SectionHeader
+            title="Upcoming"
+            subtitle="Deadlines & exams"
+            actionLabel="See all"
+            onAction={() => {}}
+          />
+          <View style={styles.list}>
+            {urgentUpcoming.map(item => (
+              <UpcomingCard
+                key={item.id}
+                upcoming={item}
+                subject={subjectMap[item.subjectId]}
+              />
+            ))}
+          </View>
+        </View>
+
+        {/* ── Today's schedule ── */}
+        <View style={styles.section}>
+          <SectionHeader title="Today" subtitle={today} />
+          {todaySchedule.length > 0 ? (
+            <View style={styles.list}>
+              {todaySchedule.map(entry => (
+                <ScheduleBlock
+                  key={entry.id}
+                  entry={entry}
+                  subject={subjectMap[entry.subjectId]}
+                />
+              ))}
+            </View>
+          ) : (
+            <ThemedView style={[styles.emptyDay, { backgroundColor: surface, borderColor: border }]}>
+              <ThemedText style={[styles.emptyDayText, { color: muted }]}>
+                No classes today 🎉
+              </ThemedText>
+            </ThemedView>
+          )}
+        </View>
+
+        {/* ── Currently studying ── */}
+        <View style={styles.section}>
+          <SectionHeader
+            title="Studying"
+            subtitle="This semester"
+            actionLabel="See all"
+            onAction={() => {}}
+          />
+          <View style={styles.list}>
+            {studyingSubjects.map(subject => {
+              const grades = mockGrades.filter(g => g.subjectId === subject.id);
+              const overall = computeOverallScore(grades);
+              return (
+                <SubjectCard
+                  key={subject.id}
+                  subject={subject}
+                  overallScore={grades.length > 0 ? overall : undefined}
+                />
+              );
+            })}
+          </View>
+        </View>
+
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  safe: { flex: 1 },
+  scroll: { flex: 1 },
+  content: {
+    paddingHorizontal: 20,
+    paddingBottom: 40,
+    gap: 24,
+  },
+
+  // Greeting
+  header: {
+    paddingTop: 16,
+    gap: 3,
+  },
+  greetText: {
+    fontSize: 15,
+  },
+  nameText: {
+    fontSize: 28,
+    fontWeight: '800',
+    lineHeight: 34,
+  },
+  metaText: {
+    fontSize: 13,
+    marginTop: 2,
+  },
+
+  // Stats
+  statsRow: {
     flexDirection: 'row',
+    gap: 10,
+  },
+  statCard: {
+    flex: 1,
+    borderRadius: 14,
+    borderWidth: 1,
+    paddingVertical: 14,
+    paddingHorizontal: 10,
     alignItems: 'center',
-    gap: 8,
+    gap: 1,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  statLabel: {
+    fontSize: 10,
+    fontWeight: '600',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  statValue: {
+    fontSize: 24,
+    fontWeight: '800',
+    lineHeight: 28,
   },
+  statSub: {
+    fontSize: 11,
+  },
+
+  // Sections
+  section: { gap: 12 },
+  list: { gap: 8 },
+
+  // Empty day
+  emptyDay: {
+    borderRadius: 12,
+    borderWidth: 1,
+    paddingVertical: 18,
+    alignItems: 'center',
+  },
+  emptyDayText: { fontSize: 14 },
 });

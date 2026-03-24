@@ -100,4 +100,14 @@ export const mockSchedule = [
   { id: 'sc5', subjectId: 's3', day: 'Mon', startTime: '14:00', endTime: '15:30', room: 'Lab 101', type: 'lab' },
   { id: 'sc6', subjectId: 's3', day: 'Fri', startTime: '10:00', endTime: '11:30', room: 'Room 405', type: 'lecture' },
   { id: 'sc7', subjectId: 's1', day: 'Fri', startTime: '14:00', endTime: '15:00', room: 'Lab 203', type: 'tutorial' },
+  { id: 'sc8', subjectId: 's3', day: 'Tue', startTime: '14:00', endTime: '15:30', room: 'Room 405', type: 'lecture' },
+];
+
+/** Upcoming deadlines and exams — sorted by daysLeft ascending */
+export const mockUpcoming = [
+  { id: 'u1', subjectId: 's3', type: 'quiz',       name: 'Quiz 2',         dueDate: '2026-03-25', daysLeft: 1 },
+  { id: 'u2', subjectId: 's2', type: 'assignment',  name: 'Problem Set 2',  dueDate: '2026-03-26', daysLeft: 2 },
+  { id: 'u3', subjectId: 's1', type: 'assignment',  name: 'Assignment 2',   dueDate: '2026-03-27', daysLeft: 3 },
+  { id: 'u4', subjectId: 's1', type: 'midterm',     name: 'Midterm Exam',   dueDate: '2026-03-31', daysLeft: 7 },
+  { id: 'u5', subjectId: 's2', type: 'midterm',     name: 'Midterm Exam',   dueDate: '2026-04-02', daysLeft: 9 },
 ];

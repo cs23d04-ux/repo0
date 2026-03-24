@@ -7,6 +7,14 @@ const MAPPING = {
   'paperplane.fill': 'send',
   'chevron.left.forwardslash.chevron.right': 'code',
   'chevron.right': 'chevron-right',
+  // Student grade app tabs
+  'calendar.fill': 'calendar-today',
+  'book.fill': 'menu-book',
+  'chart.bar.fill': 'bar-chart',
+  // Misc
+  'bell.fill': 'notifications',
+  'person.fill': 'person',
+  'clock.fill': 'schedule',
 };
 
 /**

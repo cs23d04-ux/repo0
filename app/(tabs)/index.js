@@ -114,7 +114,6 @@ export default function HomeScreen() {
           )}
         </View>
 
-        {/* ── Currently studying ── */}
         <View style={styles.section}>
           <SectionHeader
             title="Studying"

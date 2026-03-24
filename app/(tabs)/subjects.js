@@ -7,8 +7,8 @@ export default function SubjectsScreen() {
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
       <View style={styles.container}>
-        <ThemedText style={styles.title}>Subjects</ThemedText>
-        <ThemedText style={styles.sub}>Coming soon</ThemedText>
+        <ThemedText style={styles.title}>Хичээл</ThemedText>
+        <ThemedText style={styles.sub}>Тун удахгүй...</ThemedText>
       </View>
     </SafeAreaView>
   );

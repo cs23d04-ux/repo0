@@ -1,11 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
-/**
- * Labeled text input with focus and error states.
- * Used in LoginScreen for email/password fields.
- * Works on light card backgrounds.
- */
 export default function FormField({ label, error, style, ...rest }) {
   const [focused, setFocused] = useState(false);
 

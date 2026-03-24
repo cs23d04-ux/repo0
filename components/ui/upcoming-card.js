@@ -17,9 +17,9 @@ function urgencyColor(daysLeft) {
 }
 
 function daysLabel(daysLeft) {
-  if (daysLeft === 0) return 'Today';
-  if (daysLeft === 1) return 'Tomorrow';
-  return `${daysLeft}d left`;
+  if (daysLeft === 0) return 'Өнөөдөр';
+  if (daysLeft === 1) return 'Маргааш';
+  return `${daysLeft} хоног`;
 }
 
 /**

@@ -38,7 +38,6 @@ export default function LoginScreen() {
       router.replace('/(tabs)');
     }, 800);
   };
-
   return (
     <LinearGradient
       colors={COLORS.gradientAuth}
@@ -56,18 +55,15 @@ export default function LoginScreen() {
             style={styles.logo}
             resizeMode="contain"
           />
-          <Text style={styles.appName}>GradeBook</Text>
         </View>
 
         <Animated.View style={[styles.card, { transform: [{ translateX: shakeAnim }] }]}>
-          <Text style={styles.title}>Нэвтрэх</Text>
-          <Text style={styles.subtitle}>Суралцагчийн эрхээр нэвтэрнэ үү</Text>
 
           <ErrorMessage message={error} style={styles.errorMsg} />
 
           <FormField
             label="Нэвтрэх нэр"
-            placeholder="student"
+            placeholder="yourname@nmit.edu.mn"
             value={email}
             onChangeText={t => { setEmail(t); setError(''); }}
             error={!!error}
@@ -110,7 +106,7 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   logo: {
-    width: 72,
+    width: 200,
     height: 72,
     borderRadius: 18,
   },

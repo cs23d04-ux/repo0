@@ -1,10 +1,10 @@
 export const mockStudent = {
   id: '1',
-  name: 'Alex Johnson',
-  studentId: '2024001234',
+  name: 'Амгалан Батболд',
+  studentId: 'cs23d04',
   gpa: 3.7,
-  year: 2,
-  major: 'Computer Science',
+  year: 3,
+  major: 'Компьютерийн ухаан',
 };
 
 export const mockSubjects = [

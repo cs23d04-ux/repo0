@@ -1,3 +1,4 @@
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
@@ -5,87 +6,92 @@ import { ThemedView } from '@/components/themed-view';
 import { useThemeColor } from '@/hooks/use-theme-color';
 
 const CLASS_TYPE_LABEL = {
-  lecture: 'Lecture',
-  lab: 'Lab',
-  tutorial: 'Tutorial',
-  seminar: 'Seminar',
+  lecture:  'Лекц',
+  lab:      'Лаборатори',
+  tutorial: 'Дасгал',
+  seminar:  'Семинар',
+};
+
+const CLASS_TYPE_ICON = {
+  lecture:  'menu-book',
+  lab:      'science',
+  tutorial: 'edit-note',
+  seminar:  'groups',
 };
 
 export function ScheduleBlock({ entry, subject }) {
   const borderColor = useThemeColor({}, 'border');
+  const muted       = useThemeColor({}, 'muted');
+  const surface     = useThemeColor({}, 'surface');
+
+  const icon  = CLASS_TYPE_ICON[entry.type] ?? 'class';
+  const label = CLASS_TYPE_LABEL[entry.type];
 
   return (
-    <ThemedView style={[styles.block, { borderColor }]}>
-      <View style={[styles.colorBar, { backgroundColor: subject.color }]} />
-      <View style={styles.content}>
-        <View style={styles.top}>
-          <ThemedText style={styles.name} numberOfLines={1}>
-            {subject.name}
-          </ThemedText>
-          <View style={[styles.typeBadge, { backgroundColor: subject.color + '22' }]}>
-            <ThemedText style={[styles.typeLabel, { color: subject.color }]}>
-              {CLASS_TYPE_LABEL[entry.type]}
-            </ThemedText>
-          </View>
-        </View>
-        <View style={styles.meta}>
-          <ThemedText style={styles.metaText}>
-            {entry.startTime} – {entry.endTime}
-          </ThemedText>
-          <ThemedText style={styles.separator}>·</ThemedText>
-          <ThemedText style={styles.metaText}>{entry.room}</ThemedText>
-        </View>
+    <ThemedView style={[styles.card, { borderColor, backgroundColor: surface }]}>
+      {/* Left icon */}
+      <View style={[styles.iconWrap, { backgroundColor: subject.color + '18' }]}>
+        <MaterialIcons name={icon} size={20} color={subject.color} />
       </View>
+
+      {/* Content */}
+      <View style={styles.body}>
+        <ThemedText style={[styles.typeLabel, { color: muted }]}>{label}</ThemedText>
+        <ThemedText style={styles.subjectName} numberOfLines={1}>{subject.name}</ThemedText>
+        <ThemedText style={[styles.meta, { color: muted }]}>
+          {entry.startTime} – {entry.endTime} · {entry.room}
+        </ThemedText>
+      </View>
+
+      {/* Color dot */}
+      <View style={[styles.dot, { backgroundColor: subject.color }]} />
     </ThemedView>
   );
 }
 
 const styles = StyleSheet.create({
-  block: {
-    flexDirection: 'row',
-    borderRadius: 12,
-    borderWidth: 1,
-    overflow: 'hidden',
-  },
-  colorBar: {
-    width: 4,
-  },
-  content: {
-    flex: 1,
-    padding: 12,
-    gap: 4,
-  },
-  top: {
+  card: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: 8,
+    borderRadius: 14,
+    borderWidth: 1,
+    padding: 12,
+    gap: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.04,
+    shadowRadius: 6,
+    elevation: 2,
   },
-  name: {
+  iconWrap: {
+    width: 44,
+    height: 44,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  body: {
     flex: 1,
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  typeBadge: {
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-    borderRadius: 8,
+    gap: 2,
   },
   typeLabel: {
     fontSize: 11,
-    fontWeight: '600',
+    fontWeight: '500',
+    textTransform: 'uppercase',
+    letterSpacing: 0.4,
+  },
+  subjectName: {
+    fontSize: 15,
+    fontWeight: '700',
+    lineHeight: 20,
   },
   meta: {
-    flexDirection: 'row',
-    gap: 4,
-    alignItems: 'center',
-  },
-  metaText: {
     fontSize: 12,
-    opacity: 0.6,
   },
-  separator: {
-    fontSize: 12,
-    opacity: 0.35,
+  dot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    alignSelf: 'center',
   },
 });

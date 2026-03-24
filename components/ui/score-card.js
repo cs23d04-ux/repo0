@@ -18,7 +18,7 @@ export function ScoreCard({ grade }) {
           {grade.name}
         </ThemedText>
         <ThemedText style={styles.meta}>
-          {gradeTypeLabel(grade.type)} · Weight {grade.weight}%
+          {gradeTypeLabel(grade.type)} · Жин {grade.weight}%
         </ThemedText>
       </View>
       <View style={styles.right}>

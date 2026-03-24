@@ -9,6 +9,7 @@ const MAPPING = {
   'chevron.right': 'chevron-right',
   // Student grade app tabs
   'calendar.fill': 'calendar-today',
+  'calendar': 'calendar-today',
   'book.fill': 'menu-book',
   'chart.bar.fill': 'bar-chart',
   // Misc

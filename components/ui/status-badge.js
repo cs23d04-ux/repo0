@@ -17,7 +17,7 @@ export function StatusBadge({ status, size = 'md' }) {
       ]}>
       <View style={[styles.dot, { backgroundColor: color }]} />
       <ThemedText style={[styles.label, size === 'sm' && styles.labelSm, { color }]}>
-        {status === 'studying' ? 'Studying' : 'Studied'}
+        {status === 'studying' ? 'Судалж байгаа' : 'Судалсан'}
       </ThemedText>
     </View>
   );

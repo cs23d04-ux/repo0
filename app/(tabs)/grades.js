@@ -7,8 +7,8 @@ export default function GradesScreen() {
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
       <View style={styles.container}>
-        <ThemedText style={styles.title}>Grades</ThemedText>
-        <ThemedText style={styles.sub}>Coming soon</ThemedText>
+        <ThemedText style={styles.title}>Дүн</ThemedText>
+        <ThemedText style={styles.sub}>Тун удахгүй...</ThemedText>
       </View>
     </SafeAreaView>
   );

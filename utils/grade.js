@@ -44,11 +44,11 @@ export function computeOverallScore(grades) {
 /** Human-readable label for a grade type. */
 export function gradeTypeLabel(type) {
   const labels = {
-    attendance: 'Attendance',
-    assignment: 'Assignment',
-    quiz: 'Quiz',
-    midterm: 'Midterm',
-    final: 'Final',
+    attendance: 'Ирц',
+    assignment: 'Даалгавар',
+    quiz: 'Тест',
+    midterm: 'Явцын шалгалт',
+    final: 'Улирлын шалгалт',
   };
   return labels[type];
 }

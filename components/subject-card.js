@@ -1,3 +1,4 @@
+import { useRouter } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 
@@ -11,6 +12,7 @@ import { scoreToLetter } from '@/utils/grade';
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 export function SubjectCard({ subject, overallScore, onPress }) {
+  const router = useRouter();
   const borderColor = useThemeColor({}, 'border');
   const scale = useSharedValue(1);
 
@@ -30,10 +32,15 @@ export function SubjectCard({ subject, overallScore, onPress }) {
     ? scoreToLetter(Math.round(overallScore * 100), 100)
     : undefined;
 
+  function handlePress() {
+    if (onPress) onPress();
+    else router.push(`/subject/${subject.id}`);
+  }
+
   return (
     <AnimatedPressable
       style={animStyle}
-      onPress={onPress}
+      onPress={handlePress}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}>
       <ThemedView style={[styles.card, { borderColor }]}>
@@ -45,7 +52,7 @@ export function SubjectCard({ subject, overallScore, onPress }) {
                 {subject.name}
               </ThemedText>
               <ThemedText style={styles.meta}>
-                {subject.code} · {subject.credits} credits
+                {subject.code} · {subject.credits} кредит
               </ThemedText>
             </View>
             <StatusBadge status={subject.status} size="sm" />

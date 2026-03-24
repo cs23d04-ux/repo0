@@ -74,10 +74,10 @@ export const GradeColors = {
   F: '#EF4444', // red
 };
 
-// ─── Auth gradient — Slate Dark diagonal ────────────────────────────────────
+// ─── Auth gradient — Red diagonal ───────────────────────────────────────────
 // Used with locations={[0, 0.35, 0.7, 1]}
 export const COLORS = {
-  gradientAuth: ['#0F172A', '#1E293B', '#1E3A6E', '#3B82F6'],
+  gradientAuth: ['#800020', '#6e001a', '#640017', '#5a0015'],
 };
 
 // ─── Subject accent palette ──────────────────────────────────────────────────

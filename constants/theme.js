@@ -72,6 +72,11 @@ export const GradeColors = {
   F: '#EF4444',
 };
 
+// Auth screen gradient — 4 stops matching locations={[0, 0.35, 0.7, 1]}
+export const COLORS = {
+  gradientAuth: ['#1a1a2e', '#16213e', '#0f3460', '#0a7ea4'],
+};
+
 // Accent palette to auto-assign colors to subjects
 export const SubjectPalette = [
   '#6366F1',

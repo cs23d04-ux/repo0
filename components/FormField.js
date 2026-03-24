@@ -12,7 +12,7 @@ export default function FormField({ label, error, style, ...rest }) {
   const borderColor = error
     ? '#EF4444'
     : focused
-    ? '#0a7ea4'
+    ? '#3B82F6'
     : '#E5E7EB';
 
   return (

@@ -3,10 +3,6 @@ import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-na
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
-/**
- * Full-width primary action button with press scale animation and loading state.
- * Used in LoginScreen as the submit button.
- */
 export default function PrimaryButton({ label, onPress, loading = false, style }) {
   const scale = useSharedValue(1);
 
@@ -34,10 +30,10 @@ const styles = StyleSheet.create({
   button: {
     height: 52,
     borderRadius: 14,
-    backgroundColor: '#0a7ea4',
+    backgroundColor: '#3B82F6',
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#0a7ea4',
+    shadowColor: '#3B82F6',
     shadowOffset: { width: 0, height: 6 },
     shadowOpacity: 0.35,
     shadowRadius: 12,

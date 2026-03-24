@@ -1,90 +1,93 @@
 import { Platform } from 'react-native';
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+// ─── Palette ────────────────────────────────────────────────────────────────
+// Slate Dark theme — clean, professional, blue accent
+const primaryLight = '#3B82F6'; // blue-500
+const primaryDark  = '#60A5FA'; // blue-400
 
 export const Colors = {
   light: {
-    text: '#11181C',
-    background: '#fff',
-    tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
-    // App-specific tokens
-    surface: '#F8F9FA',
-    border: '#E9ECEF',
-    muted: '#6C757D',
-    primary: '#0a7ea4',
-    success: '#2DB87D',
-    warning: '#F59E0B',
-    danger: '#EF4444',
-    studying: '#3B82F6',
-    studied: '#2DB87D',
+    text:             '#0F172A', // slate-900
+    background:       '#FFFFFF',
+    tint:             primaryLight,
+    icon:             '#64748B', // slate-500
+    tabIconDefault:   '#94A3B8', // slate-400
+    tabIconSelected:  primaryLight,
+    // App tokens
+    surface:          '#F8FAFC', // slate-50
+    border:           '#E2E8F0', // slate-200
+    muted:            '#94A3B8', // slate-400
+    primary:          primaryLight,
+    success:          '#10B981', // emerald-500
+    warning:          '#F59E0B', // amber-500
+    danger:           '#EF4444', // red-500
+    studying:         '#3B82F6', // blue-500
+    studied:          '#10B981', // emerald-500
   },
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
-    tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
-    // App-specific tokens
-    surface: '#1E2122',
-    border: '#2D3436',
-    muted: '#9BA1A6',
-    primary: '#38BDF8',
-    success: '#34D399',
-    warning: '#FBBF24',
-    danger: '#F87171',
-    studying: '#60A5FA',
-    studied: '#34D399',
+    text:             '#F1F5F9', // slate-100
+    background:       '#0F172A', // slate-900
+    tint:             primaryDark,
+    icon:             '#94A3B8', // slate-400
+    tabIconDefault:   '#64748B', // slate-500
+    tabIconSelected:  primaryDark,
+    // App tokens
+    surface:          '#1E293B', // slate-800
+    border:           '#334155', // slate-700
+    muted:            '#64748B', // slate-500
+    primary:          primaryDark,
+    success:          '#34D399', // emerald-400
+    warning:          '#FBBF24', // amber-400
+    danger:           '#F87171', // red-400
+    studying:         '#60A5FA', // blue-400
+    studied:          '#34D399', // emerald-400
   },
 };
 
 export const Fonts = Platform.select({
   ios: {
-    sans: 'system-ui',
-    serif: 'ui-serif',
+    sans:    'system-ui',
+    serif:   'ui-serif',
     rounded: 'ui-rounded',
-    mono: 'ui-monospace',
+    mono:    'ui-monospace',
   },
   default: {
-    sans: 'normal',
-    serif: 'serif',
+    sans:    'normal',
+    serif:   'serif',
     rounded: 'normal',
-    mono: 'monospace',
+    mono:    'monospace',
   },
   web: {
-    sans: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-    serif: "Georgia, 'Times New Roman', serif",
+    sans:    "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+    serif:   "Georgia, 'Times New Roman', serif",
     rounded: "'SF Pro Rounded', 'Hiragino Maru Gothic ProN', Meiryo, 'MS PGothic', sans-serif",
-    mono: "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+    mono:    "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
   },
 });
 
-// Semantic grade colors — same in both light and dark
+// ─── Grade colors — semantic, same in light & dark ──────────────────────────
 export const GradeColors = {
-  A: '#2DB87D',
-  B: '#3B82F6',
-  C: '#F59E0B',
-  D: '#F97316',
-  F: '#EF4444',
+  A: '#10B981', // emerald
+  B: '#3B82F6', // blue
+  C: '#F59E0B', // amber
+  D: '#F97316', // orange
+  F: '#EF4444', // red
 };
 
-// Auth screen gradient — 4 stops matching locations={[0, 0.35, 0.7, 1]}
+// ─── Auth gradient — Slate Dark diagonal ────────────────────────────────────
+// Used with locations={[0, 0.35, 0.7, 1]}
 export const COLORS = {
-  gradientAuth: ['#1a1a2e', '#16213e', '#0f3460', '#0a7ea4'],
+  gradientAuth: ['#0F172A', '#1E293B', '#1E3A6E', '#3B82F6'],
 };
 
-// Accent palette to auto-assign colors to subjects
+// ─── Subject accent palette ──────────────────────────────────────────────────
 export const SubjectPalette = [
-  '#6366F1',
-  '#EC4899',
-  '#F59E0B',
-  '#10B981',
-  '#3B82F6',
-  '#8B5CF6',
-  '#EF4444',
-  '#14B8A6',
+  '#6366F1', // indigo
+  '#EC4899', // pink
+  '#F59E0B', // amber
+  '#10B981', // emerald
+  '#3B82F6', // blue
+  '#8B5CF6', // violet
+  '#EF4444', // red
+  '#14B8A6', // teal
 ];

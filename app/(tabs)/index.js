@@ -10,9 +10,7 @@ import { UpcomingCard } from '@/components/ui/upcoming-card';
 import { mockGrades, mockSchedule, mockStudent, mockSubjects, mockUpcoming } from '@/data/mock';
 import { useThemeColor } from '@/hooks/use-theme-color';
 import { computeOverallScore } from '@/utils/grade';
-
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
 function getGreeting() {
   const h = new Date().getHours();
   if (h < 12) return 'Good morning';
@@ -20,7 +18,6 @@ function getGreeting() {
   if (h < 21) return 'Good evening';
   return 'Good night';
 }
-
 export default function HomeScreen() {
   const border = useThemeColor({}, 'border');
   const muted = useThemeColor({}, 'muted');
@@ -46,7 +43,6 @@ export default function HomeScreen() {
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}>
 
-        {/* ── Greeting ── */}
         <View style={styles.header}>
           <ThemedText style={[styles.greetText, { color: muted }]}>{getGreeting()} 👋</ThemedText>
           <ThemedText style={styles.nameText}>{mockStudent.name}</ThemedText>
@@ -55,7 +51,6 @@ export default function HomeScreen() {
           </ThemedText>
         </View>
 
-        {/* ── Stats ── */}
         <View style={styles.statsRow}>
           <ThemedView style={[styles.statCard, { borderColor: border }]}>
             <ThemedText style={[styles.statLabel, { color: muted }]}>GPA</ThemedText>
@@ -80,7 +75,6 @@ export default function HomeScreen() {
           </ThemedView>
         </View>
 
-        {/* ── Upcoming deadlines ── */}
         <View style={styles.section}>
           <SectionHeader
             title="Upcoming"
@@ -99,7 +93,6 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        {/* ── Today's schedule ── */}
         <View style={styles.section}>
           <SectionHeader title="Today" subtitle={today} />
           {todaySchedule.length > 0 ? (

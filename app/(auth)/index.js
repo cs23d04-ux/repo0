@@ -6,7 +6,7 @@ import { Animated, Image, KeyboardAvoidingView, Platform, StyleSheet, Text, View
 import ErrorMessage from '@/components/ErrorMessage';
 import FormField from '@/components/FormField';
 import PrimaryButton from '@/components/PrimaryButton';
-import { useShake } from '@/hooks/use-shake';
+import useShake from '@/hooks/use-shake';
 import { COLORS } from '@/constants/theme';
 
 const MOCK_USERS = [
@@ -20,7 +20,7 @@ export default function LoginScreen() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const { shakeAnim, triggerShake } = useShake();
+  const { shakeAnim, shake: triggerShake } = useShake();
 
   const handleLogin = () => {
     setError('');
